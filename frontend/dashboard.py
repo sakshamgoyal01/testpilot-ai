@@ -5,7 +5,21 @@ import json
 from datetime import datetime
 import requests
 
-res = requests.get("http://localhost:8000/api/metrics")
+BACKEND_HOST = "testpilot-backend" # This MUST match the --name you gave your backend container
+BACKEND_PORT = 8000
+
+try:
+    res = requests.get(f"http://{BACKEND_HOST}:{BACKEND_PORT}/api/metrics")
+    res.raise_for_status() # Raise an exception for bad status codes (4xx or 5xx)
+    st.write(res.json())
+except requests.exceptions.ConnectionError as e:
+    st.error(f"Could not connect to backend: {e}")
+    st.info(f"Attempted to connect to http://{BACKEND_HOST}:{BACKEND_PORT}/api/metrics")
+    st.warning("Ensure the backend container 'testpilot-backend' is running and healthy on the same Docker network.")
+except requests.exceptions.HTTPError as e:
+    st.error(f"Backend returned an error: {e}")
+except Exception as e:
+    st.error(f"An unexpected error occurred: {e}")
 df = pd.DataFrame(res.json())
 # Sample test run data (can be replaced with API call)
 
