@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
-from backend.ai_engine.generator import generate_tests_with_type
+from ai_engine.generator import generate_tests_with_type
 
 router = APIRouter()
 

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, UploadFile, File, Form
 from fastapi.responses import JSONResponse
 import subprocess, os
-from backend.ai_engine.error_analyzer import analyze_error
+from ai_engine.error_analyzer import analyze_error
 
 router = APIRouter()
 

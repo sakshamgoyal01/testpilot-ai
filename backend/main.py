@@ -4,8 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 # Import routers
-from backend.routers import dashboard, test_gen, run_tests, code_reviews
-from backend.routers.test_gen import router
+from routers import dashboard, test_gen, run_tests, code_reviews
 
 app = FastAPI(
     title="TestPilot - AI SaaS Testing Backend",
